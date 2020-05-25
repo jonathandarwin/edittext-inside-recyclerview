@@ -7,7 +7,6 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jonathandarwin.edittextinsiderecyclerview.databinding.ActivityMainBinding
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -23,7 +22,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setListener()
     }
 
-    fun setAdapter(){
+    private fun setAdapter(){
         studentAdapter = StudentAdapter(studentList)
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
@@ -31,7 +30,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun setListener() {
+    private fun setListener() {
         binding.tvAddItem.setOnClickListener(this)
         binding.btnSubmit.setOnClickListener(this)
     }

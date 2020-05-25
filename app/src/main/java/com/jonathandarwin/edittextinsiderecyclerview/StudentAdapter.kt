@@ -13,12 +13,12 @@ class StudentAdapter(private val studentList : ArrayList<Student>) : RecyclerVie
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentAdapter.StudentViewHolder =
         StudentViewHolder(ListStudentItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun getItemCount(): Int = studentList.size
 
-    override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: StudentAdapter.StudentViewHolder, position: Int) {
         holder.bind(studentList[position])
     }
 }
