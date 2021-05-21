@@ -2,6 +2,7 @@ package com.jonathandarwin.edittextinsiderecyclerview
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
@@ -9,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jonathandarwin.edittextinsiderecyclerview.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
+
+    private val EXTRA_STUDENT_LIST = "EXTRA_STUDENT_LIST"
 
     private val studentList : ArrayList<Student> = ArrayList()
     private lateinit var studentAdapter : StudentAdapter
@@ -18,6 +21,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        savedInstanceState?.let {
+            val restoreStudentList = it.getSerializable(EXTRA_STUDENT_LIST) as ArrayList<Student>?
+            if(restoreStudentList != null) studentList.addAll(restoreStudentList)
+        }
         setAdapter()
         setListener()
     }
@@ -47,5 +54,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putSerializable(EXTRA_STUDENT_LIST, studentList)
+        super.onSaveInstanceState(outState)
     }
 }
